@@ -9,10 +9,16 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Launch Biometric" />
+        android:text="Launch Biometric Without Cipher" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Launch Biometric With Cipher" />
 
     <TextView
         android:id="@+id/textView"
