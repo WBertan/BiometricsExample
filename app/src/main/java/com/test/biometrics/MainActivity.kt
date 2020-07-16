@@ -1,6 +1,7 @@
 package com.test.biometrics
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -28,14 +29,17 @@ class MainActivity : AppCompatActivity() {
                 BiometricConstants.ERROR_NO_DEVICE_CREDENTIAL -> "NO_DEVICE_CREDENTIAL"
                 else -> "UNKNOWN"
             }
+            Log.i("asas", "onAuthenticationError: $errorCode ($error) | $errString")
             "onAuthenticationError: $errorCode ($error) | $errString".writeResult()
         }
 
         override fun onAuthenticationFailed() {
+            Log.i("asas", "onAuthenticationFailed")
             "onAuthenticationFailed".writeResult()
         }
 
         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+            Log.i("asas", "onAuthenticationSucceeded: $result")
             "onAuthenticationSucceeded: $result".writeResult()
         }
     }
@@ -48,13 +52,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun show() {
+        Log.i("asas", "show")
         val executor = ContextCompat.getMainExecutor(this)
         val biometricPrompt = BiometricPrompt(this, executor, authenticationCallback)
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Biometric login for my app")
-                .setSubtitle("Log in using your biometric credential")
-                .setNegativeButtonText("Cancel")
-                .build()
+            .setTitle("Biometric login for my app")
+            .setSubtitle("Log in using your biometric credential")
+            .setNegativeButtonText("Cancel")
+            .build()
         biometricPrompt.authenticate(promptInfo)
     }
 
